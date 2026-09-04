@@ -250,10 +250,6 @@ In NumPy, this quantity is calculated using
 charge_dispersion_01 = np.ptp(f01_vs_ng)
 ```
 
-The function `np.ptp()` calculates the peak-to-peak range:
-
-$$\operatorname{ptp}(x)=\max(x)-\min(x).$$
-
 As $E_J/E_C$ increases, the charge dispersion decreases exponentially.
 
 Therefore, operating at a large value of $E_J/E_C$ strongly suppresses the transmon's sensitivity to charge noise.
