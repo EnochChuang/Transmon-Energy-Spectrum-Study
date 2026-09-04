@@ -72,11 +72,11 @@ $$2N_{\mathrm{cut}}+1.$$
 
 ## Energy Levels and Transition Frequencies
 
-After diagonalizing the Hamiltonian, the eigenenervalue equation is
+After diagonalizing the Hamiltonian, the eigenenvalue equation is
 
 $$\hat{H}\lvert k\rangle=E_k\lvert k\rangle.$$
 
-The calculated eigenenergies are
+The calculated eigenergies are
 
 $$E_0,E_1,E_2,\ldots$$
 
