@@ -5,41 +5,74 @@ frequencies, charge dispersion, and anharmonicity of a transmon qubit.
 
 ## Physical model
 
-The transmon Hamiltonian is
+The transmon qubit is described by the Hamiltonian
 
 $$
-\hat{H}
-=
-4E_C(\hat{n}-n_g)^2
--
-E_J\cos\hat{\phi}.
+\hat{H}=4E_C(\hat{n}-n_g)^2-E_J\cos(\hat{\phi}),
 $$
 
-In the charge basis, the Hamiltonian matrix is
+where:
+
+- \(E_C\) is the charging energy.
+- \(E_J\) is the Josephson energy.
+- \(\hat{n}\) is the Cooper-pair number operator.
+- \(n_g\) is the offset charge.
+- \(\hat{\phi}\) is the superconducting phase operator.
+
+The conjugate operators satisfy
 
 $$
-H_{n'n}
+[\hat{\phi},\hat{n}]=i.
+$$
+
+In the charge basis \(\{|n\rangle\}\), the Hamiltonian matrix elements are
+
+$$
+\langle n'|\hat{H}|n\rangle
 =
 4E_C(n-n_g)^2\delta_{n'n}
--
-\frac{E_J}{2}
+-\frac{E_J}{2}
 \left(
-\delta_{n',n+1}
-+
-\delta_{n',n-1}
+\delta_{n',n+1}+\delta_{n',n-1}
 \right).
 $$
 
+The diagonal term represents the charging energy, while the off-diagonal
+terms describe Josephson tunneling between neighboring charge states.
+
+In the large-\(E_J/E_C\) transmon regime, the lowest transition frequency is approximately
+
+$$
+f_{01}\approx\frac{\sqrt{8E_JE_C}-E_C}{h},
+$$
+
+and the anharmonicity is approximately
+
+$$
+\alpha=f_{12}-f_{01}\approx-\frac{E_C}{h}.
+$$
+
+In the numerical program, `scqubits` uses \(E_C/h\) and \(E_J/h\) in GHz.
+Therefore, the corresponding frequency-unit expressions become
+
+$$
+f_{01}\approx\sqrt{8E_JE_C}-E_C,
+\qquad
+\alpha\approx-E_C,
+$$
+
+when \(E_C\) and \(E_J\) are entered directly in GHz.
+
 ## Parameters
 
-| Parameter | Value |
-|---|---:|
-| Charging energy $E_C/h$ | 0.3 GHz |
-| Josephson energy $E_J/h$ | 15.0 GHz |
-| Default ratio $E_J/E_C$ | 50 |
-| Offset-charge range $n_g$ | -1 to 1 |
-| Charge cutoff | 15 |
-| Number of energy levels | 5 |
+| Parameter | Symbol | Value |
+|---|---|---:|
+| Charging energy | EC/h | 0.3 GHz |
+| Josephson energy | EJ/h | 15.0 GHz |
+| Energy ratio | EJ/EC | 50 |
+| Offset-charge range | ng | −1 to 1 |
+| Charge-basis cutoff | ncut | 15 |
+| Calculated energy levels | — | 5 |
 
 ## Results
 
@@ -61,38 +94,52 @@ structure of the transmon.
 
 ![Charge dispersion](figures/03_charge_dispersion_vs_ej_ec.png)
 
-Increasing $E_J/E_C$ strongly suppresses the charge dispersion of
-$f_{01}$.
+The charge dispersion of the \(0\rightarrow1\) transition is defined as
+
+$$
+\epsilon_{01}
+=
+\max_{n_g}\left[f_{01}(n_g)\right]
+-
+\min_{n_g}\left[f_{01}(n_g)\right].
+$$
+
+Increasing \(E_J/E_C\) exponentially suppresses \(\epsilon_{01}\), making
+the transmon less sensitive to offset-charge fluctuations.
 
 ### 4. Anharmonicity
 
 ![Anharmonicity](figures/04_anharmonicity_vs_ej_ec.png)
 
-At large $E_J/E_C$, the anharmonicity approaches
+The anharmonicity is defined as
 
 $$
-\alpha \approx -E_C.
+\alpha=f_{12}-f_{01}.
 $$
 
-### 5. Numerical and approximate transition frequency
-
-![Transition-frequency comparison](figures/05_f01_vs_ej_ec.png)
-
-The numerical result is compared with the large-$E_J/E_C$
-approximation
+In the transmon regime,
 
 $$
-f_{01}
-\approx
-\sqrt{8E_JE_C}-E_C.
+\alpha\approx-\frac{E_C}{h}.
 $$
+
+The negative anharmonicity means that the \(1\rightarrow2\) transition
+frequency is lower than the \(0\rightarrow1\) transition frequency.
 
 ### 6. Relative anharmonicity
 
 ![Relative anharmonicity](figures/06_relative_anharmonicity_vs_ej_ec.png)
 
-Although charge dispersion is suppressed as $E_J/E_C$ increases, the
-relative anharmonicity decreases.
+The relative anharmonicity is
+
+$$
+\alpha_{\mathrm{rel}}
+=
+\frac{|\alpha|}{f_{01}}.
+$$
+
+Although increasing \(E_J/E_C\) suppresses charge dispersion, it also
+reduces the relative anharmonicity.
 
 ## Main Conclusion
 
@@ -111,5 +158,5 @@ pip install -r requirements.txt
 Run the simulation with:
 
 ```bash
-python 1. Transmon Energy Spectrum.py
+python "1. Transmon Energy Spectrum.py"
 ```
