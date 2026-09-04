@@ -70,6 +70,15 @@ $$2N_{\mathrm{cut}}+1.$$
 
 ---
 
+## Numerical Validation
+
+A charge-basis Hamiltonian was constructed manually and diagonalized
+using NumPy. Its lowest eigenenergies were compared with the results
+from `scqubits`, confirming that both methods produce consistent
+low-energy spectra.
+
+---
+
 ## Energy Levels and Transition Frequencies
 
 After diagonalizing the Hamiltonian, the eigenenvalue equation is
