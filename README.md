@@ -10,13 +10,7 @@ The main objective is to study how the ratio $E_J/E_C$ affects the transmon's se
 
 The transmon Hamiltonian is
 
-$$
-\hat{H}
-=
-4E_C(\hat{n}-n_g)^2
--
-E_J\cos(\hat{\phi}).
-$$
+$$\hat{H}=4E_C(\hat{n}-n_g)^2-E_J\cos(\hat{\phi}).$$
 
 The parameters and operators are:
 
